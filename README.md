@@ -78,8 +78,7 @@ flask --app mini_serv run -h 0.0.0.0 -p 8181 --debug --reload
 while true; do curl -s http://localhost:8181/sell_aggreg; sleep 15; done
 ```
 
-AirFlow integration master/details
-----------------------------------
+## AirFlow integration master/details
 * Objectif integrer le csv ventes.csv en utilisant la table vente (master) et vente_details (details)
     * Une création automatique du magasin sera faite dans vente
     * Une integration par ligne sera faite dans vente_details et rattachée au magasin (vente)
@@ -89,8 +88,7 @@ AirFlow integration master/details
 airflow dags trigger ventes_integration
 ```
 
-API http en FastAPI pour la tache ventes_integration
-----------------------------------------------------
+## API http en FastAPI pour la tache ventes_integration
 * Lancement serveur API local (Python FastAPI https://fastapi.tiangolo.com/)
 ```
 uvicorn mini_serv2:app --reload
@@ -99,3 +97,7 @@ uvicorn mini_serv2:app --reload
 http://localhost:8000/docs
 ![alt text](images/fastapi.png "FastAPI")
 
+# TRADUCTION Français vers Englais
+https://github-com.translate.goog/pahpa/airflow-study/blob/main/README.md?_x_tr_sl=fr&_x_tr_tl=en&_x_tr_hl=fr&_x_tr_pto=wapp
+
+MERCI
