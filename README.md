@@ -1,6 +1,5 @@
 # Autoformation à Airflow par l'exemple
-* L'objectif de ce repo est d'essayé d'aider et moi même de comprendre les finesses de ce produit, un grand
-merci à la communauté Apache Airflow
+* L'objectif de ce repo est d'essayer d'aider, un grand merci à la communauté Apache Airflow
 
 ## Installation de votre environnement **python 3.10** de développement
 * A lire pour comprendre le virtualenv python (https://blog.stephane-robert.info/post/python-pyenv-pipenv/)
@@ -73,15 +72,15 @@ flask --app mini_serv run -h 0.0.0.0 -p 8181 --debug --reload
 * Utilisation request get info pour un magasin
 [Info Magasin B](http://localhost:8181/magasin/Magasin%20B)
 ![alt text](images/flask.png "Flask")
-* Utilisation curl en boucle 15s pour voir etat des aggregations
+* Utilisation curl en boucle 15s pour voir l'état des agrégations
 ```console
 while true; do curl -s http://localhost:8181/sell_aggreg; sleep 15; done
 ```
 
 ## AirFlow integration master/details
-* Objectif integrer le csv ventes.csv en utilisant la table vente (master) et vente_details (details)
+* Objectif intégrer le csv ventes.csv en utilisant la table vente (master) et vente_details (details)
     * Une création automatique du magasin sera faite dans vente
-    * Une integration par ligne sera faite dans vente_details et rattachée au magasin (vente)
+    * Une intégration par ligne sera faite dans vente_details et rattachée au magasin (vente)
     * Je n'ai pas mis en place un cumul de vente par article mais juste monter comment faire du relationnel
 * Exécution instant du workflow ventes_integration
 ```
