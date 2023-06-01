@@ -1,0 +1,5 @@
+apache-airflow==2.6.0 --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.6.0/constraints-3.10.txt"
+pandas
+pyarrow
+fastapi
+uvicorn
