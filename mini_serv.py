@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # flask --app mini_serv run -h 0.0.0.0 -p 8181 --debug --reload
 from flask import Flask, jsonify
 import sqlite3

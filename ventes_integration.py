@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import csv
 import logging
 import pendulum
@@ -60,6 +61,7 @@ dag = DAG(
     description='Load CSV data into the database',
     schedule=None,
     start_date=pendulum.datetime(2023, 5, 15, tz="Europe/Paris"),
+    tags=["paHpa", "ventes", "intégration", "étude", "study"]
 )
 
 csv_to_database = PythonOperator(

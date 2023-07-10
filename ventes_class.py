@@ -1,9 +1,9 @@
+# -*- coding: utf-8 -*-
 import uuid
 import logging
 from sqlalchemy import Column, String, DateTime, Float, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import func
 
 logger = logging.getLogger(__name__)
 Base = declarative_base()

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pendulum
 
 import pandas as pd
@@ -17,7 +18,7 @@ with DAG(
     schedule='* * * * *',
     start_date=pendulum.datetime(2023, 5, 15, tz="Europe/Paris"),
     catchup=False,
-    tags=["paHpa", "selling", "aggregate"]
+    tags=["paHpa", "selling", "aggregate", "study"]
 ) as dag:
 
     def extract(**kwargs):

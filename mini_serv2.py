@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # uvicorn mini_serv2:app --reload
 from fastapi import FastAPI
 from sqlalchemy import create_engine
