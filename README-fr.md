@@ -20,20 +20,23 @@ cd <my_src_dev>
 git clone https://github.com/pahpa/airflow-study
 cd aiflow-study
 pip install -r requirements-dev.txt
+```
+* Création et initialisation de la base de données + ajout user admin
+```
 airflow db init
-airflow users create \
-    --email spiderman@superhero.org \
-    --username admin \
-    --firstname Peter \
-    --lastname Parker \
-    --role Admin \
-    --password tX&?3B2$4gX?bAfS
+airflow users  create --role Admin --username admin --email admin --firstname admin --lastname admin --password admin
 ```
 * Un username/password vous sera affecté
-> Login web local (username: **admin**  password: **tX&?3B2$4gX?bAfS**)
+> Login web local (username: **admin**  password: **admin**)
 * airflow sera installé dans ~/airflow 
-* Si vous voulez changer le TimeZone modifiez dans ~/airflow/airflow.cfg **default_timezone = Europe/Paris** 
+* Si vous voulez changer le TimeZone modifiez dans ~/airflow/airflow.cfg **default_timezone = Europe/Paris**
+```
+sed -i 's/default_ui_timezone = UTC/default_ui_timezone = Europe\/Paris/' ~/airflow/airflow.cfg
+```
 * Si vous ne voulez pas les exemples AirFlow modifiez dans ~/airflow/airflow.cfg **load_examples = False**
+```
+sed -i 's/load_examples = True/load_examples = False/' ~/airflow/airflow.cfg
+```
 * Préparation des fichiers de tests
 ```console
 mkdir -p ~/airflow/dags
