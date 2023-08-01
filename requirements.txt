@@ -1,0 +1,6 @@
+apache-airflow[kubernetes]==2.6.0 --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.6.0/constraints-3.10.txt"
+pydantic<2
+pandas
+pyarrow
+fastapi
+uvicorn

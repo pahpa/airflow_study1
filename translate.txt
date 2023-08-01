@@ -1,0 +1,9 @@
+https://linuxhint.com/translate_language_on_linux_terminal/
+
+-------------------------------------------------------------------------
+from git (https://github.com/soimort/translate-shell) + sudo make install
+trans --version
+Translate Shell       0.9.7.1-git:4b4f024
+-------------------------------------------------------------------------
+
+trans -b :fr :en -i README-fr.md -o README-en.md
