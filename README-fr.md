@@ -13,7 +13,9 @@ mkdir <my_src_dev>
 cd <my_src_dev>
 ```
 
-## AirFlow une gestion de workflow OpenSource (Préparation)
+## AirFlow une gestion de workflow OpenSource
+
+### Préparation
 * Url du produit (https://airflow.apache.org/)
 * Installation du projet github dans votre env python (https://github.com/pahpa/airflow-study)
 ```console
@@ -56,7 +58,7 @@ rm ~/airflow/*.pid
 ```
 ![Airflow!](images/airflow.png "Airflow")
 
-## AirFlow une gestion de workflow OpenSource (Test Workflow)
+### Test d'un workflow
 * Test tache Airflow (selling_aggreg)
  * Vérification de la liste des workflows
  ```
