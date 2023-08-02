@@ -58,13 +58,12 @@ rm ~/airflow/*.pid
 ```
 ![Airflow!](images/airflow.png "Airflow")
 
-### Test d'un workflow
-* Test tache Airflow (selling_aggreg)
+### Execute a workflow
 * Workflow list check
 ```
 airflow dags list
 ```
-* Instant execution of the selling_aggreg workflow
+* Immediate execution of the selling_aggreg workflow
 ```
 airflow dags trigger selling_aggreg
 ```
@@ -86,7 +85,7 @@ while true; do curl -s http://localhost:8181/sell_aggreg; sleep 15; done
 * Objective to integrate the csv sales.csv using the sales table (master) and vente_details (details)
 * An automatic creation of the store will be made in sale
 * An integration per line will be made in vente_details and attached to the store (sale)
-* I did not set up an accumulation of sales per article but just to show how to do relational
+* I did not set up an accumulation of sales by article but just to show how to do relational
 * Instant execution of the sales_integration workflow
 ```
 airflow dags trigger ventes_integration
