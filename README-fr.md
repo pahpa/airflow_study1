@@ -58,16 +58,15 @@ rm ~/airflow/*.pid
 ```
 ![Airflow!](images/airflow.png "Airflow")
 
-### Test d'un workflow
-* Test tache Airflow (selling_aggreg)
- * Vérification de la liste des workflows
- ```
- airflow dags list
- ```
- * Exécution instant du workflow selling_aggreg
- ```
- airflow dags trigger selling_aggreg
- ```
+### Exécuter un workflow
+* Vérification de la liste des workflows
+```
+airflow dags list
+```
+* Exécution immédiate du workflow selling_aggreg
+```
+airflow dags trigger selling_aggreg
+```
 
 ## API http en flask pour la tache selling_aggreg
 * Lancement serveur API local (Python Flask https://flask.palletsprojects.com/)
@@ -86,7 +85,7 @@ while true; do curl -s http://localhost:8181/sell_aggreg; sleep 15; done
 * Objectif intégrer le csv ventes.csv en utilisant la table vente (master) et vente_details (details)
     * Une création automatique du magasin sera faite dans vente
     * Une intégration par ligne sera faite dans vente_details et rattachée au magasin (vente)
-    * Je n'ai pas mis en place un cumul de vente par article mais juste monter comment faire du relationnel
+    * Je n'ai pas mis en place un cumul de vente par article mais juste montrer comment faire du relationnel
 * Exécution instant du workflow ventes_integration
 ```
 airflow dags trigger ventes_integration
