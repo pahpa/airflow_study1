@@ -20,7 +20,7 @@ fix-perms: ## Fixe les permissions des dossiers (nécessite sudo)
 
 airflow-data: ## Prépare la structure des dossiers et les fichiers .gitkeep
 	mkdir -p ./dags ./logs ./plugins ./config
-	touch ./dags/.gitkeep ./logs/.gitkeep ./plugins/.gitkeep ./config/.gitkeep
+	touch ./dags/.gitkeep ./logs/.gitkeep ./plugins/.gitkeep
 	@echo "Structure des dossiers prête."
 
 airflow-init: setup-env airflow-data ## Setup complet : Build + DB + Admin + Permissions

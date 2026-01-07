@@ -8,10 +8,6 @@ logs/*
 plugins/*
 !plugins/.gitkeep
 
-# Dossier de config (optionnel : garde le si tu veux partager ta config)
-# config/*
-# !config/.gitkeep
-
 # Base de données locale (si tu as mappé un volume postgres)
 postgres-data/
 

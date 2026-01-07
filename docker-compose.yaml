@@ -16,8 +16,8 @@ x-airflow-common: &airflow-common
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
     - ./config:/opt/airflow/config
-    - .:/opt/airflow                   # Permet aux serveurs de trouver les scripts .py à la racine
-    - /var/tmp:/var/tmp                # Partage des fichiers CSV et SQLite
+    - .:/opt/airflow
+    - /var/tmp:/var/tmp
   user: "${AIRFLOW_UID:-5000}:0"
   depends_on:
     postgres:
@@ -51,7 +51,6 @@ services:
     <<: *airflow-common
     command: scheduler
 
-  # --- Serveur Flask (Data/Reporting) ---
   mini-serv-flask:
     <<: *airflow-common
     container_name: mini-serv-flask
@@ -59,13 +58,23 @@ services:
     ports:
       - "8181:8181"
 
-  # --- Serveur FastAPI (Backend/ORM) ---
   mini-serv-fastapi:
     <<: *airflow-common
     container_name: mini-serv-fastapi
     command: bash -c "pip install fastapi uvicorn sqlalchemy && uvicorn mini_serv2:app --host 0.0.0.0 --port 8000"
     ports:
       - "8000:8000"
+
+  # --- Dashboard Homer ---
+  homer:
+    image: b4bz/homer
+    container_name: homer
+    volumes:
+      - ./config:/www/assets
+    ports:
+      - "80:8080"
+    user: "${AIRFLOW_UID:-5000}:0"
+    restart: always
 
 volumes:
   postgres-db-volume:
