@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from ventes_class import Vente, VenteDetails
+from dags.ventes_class import Vente, VenteDetails
 
 engine = create_engine('sqlite:////var/tmp/ventes_all.db')
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

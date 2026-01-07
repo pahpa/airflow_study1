@@ -9,7 +9,8 @@ app = Flask(__name__)
 
 @app.route('/magasin/<nom_magasin>')
 def details_magasin(nom_magasin):
-    df = pd.read_csv('/var/tmp/ventes.csv')
+    df = pd.read_csv('/var/tmp/ventes.csv', quotechar='"')
+    df['nom_magasin'] = df['nom_magasin'].str.strip()
     ventes = df[df['nom_magasin'] == nom_magasin]
     details = []
     for _, vente in ventes.iterrows():

@@ -10,13 +10,14 @@ x-airflow-common: &airflow-common
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__CORE__DEFAULT_TIMEZONE: 'Europe/Paris'
-    # Utilisation de l'UID passé par le .env (généré par le Makefile)
     AIRFLOW_UID: ${AIRFLOW_UID:-5000}
   volumes:
-    - ./dags:/opt/airflow/dags        # Vos DAGs (.py)
-    - ./logs:/opt/airflow/logs        # Les logs d'exécution
-    - ./plugins:/opt/airflow/plugins  # Plugins éventuels
-    - /var/tmp:/var/tmp               # Pour vos CSV comme ventes.csv
+    - ./dags:/opt/airflow/dags
+    - ./logs:/opt/airflow/logs
+    - ./plugins:/opt/airflow/plugins
+    - ./config:/opt/airflow/config
+    - .:/opt/airflow                   # Permet aux serveurs de trouver les scripts .py à la racine
+    - /var/tmp:/var/tmp                # Partage des fichiers CSV et SQLite
   user: "${AIRFLOW_UID:-5000}:0"
   depends_on:
     postgres:
@@ -50,12 +51,22 @@ services:
     <<: *airflow-common
     command: scheduler
 
-  # Votre API FastAPI intégrée à la stack
-  api-service:
+  # --- Serveur Flask (Data/Reporting) ---
+  mini-serv-flask:
     <<: *airflow-common
-    command: bash -c "uvicorn mini_serv2:app --host 0.0.0.0 --port 8000"
+    container_name: mini-serv-flask
+    command: bash -c "pip install flask && flask --app mini_serv run -h 0.0.0.0 -p 8181"
+    ports:
+      - "8181:8181"
+
+  # --- Serveur FastAPI (Backend/ORM) ---
+  mini-serv-fastapi:
+    <<: *airflow-common
+    container_name: mini-serv-fastapi
+    command: bash -c "pip install fastapi uvicorn sqlalchemy && uvicorn mini_serv2:app --host 0.0.0.0 --port 8000"
     ports:
       - "8000:8000"
 
 volumes:
   postgres-db-volume:
+  
