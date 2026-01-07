@@ -6,4 +6,4 @@ trans --version
 Translate Shell       0.9.7.1-git:4b4f024
 -------------------------------------------------------------------------
 
-trans -b :fr :en -i README-fr.md -o README-en.md
+trans -b :fr :en -i README-fr.txt -o README-en.txt

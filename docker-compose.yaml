@@ -1,0 +1,61 @@
+version: '3.8'
+
+x-airflow-common: &airflow-common
+  build: .
+  environment:
+    &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__CORE__FERNET_KEY: ''
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    AIRFLOW__CORE__DEFAULT_TIMEZONE: 'Europe/Paris'
+    # Utilisation de l'UID passé par le .env (généré par le Makefile)
+    AIRFLOW_UID: ${AIRFLOW_UID:-5000}
+  volumes:
+    - ./dags:/opt/airflow/dags        # Vos DAGs (.py)
+    - ./logs:/opt/airflow/logs        # Les logs d'exécution
+    - ./plugins:/opt/airflow/plugins  # Plugins éventuels
+    - /var/tmp:/var/tmp               # Pour vos CSV comme ventes.csv
+  user: "${AIRFLOW_UID:-5000}:0"
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      retries: 5
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 10s
+      retries: 5
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+
+  # Votre API FastAPI intégrée à la stack
+  api-service:
+    <<: *airflow-common
+    command: bash -c "uvicorn mini_serv2:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8000:8000"
+
+volumes:
+  postgres-db-volume:
