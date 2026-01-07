@@ -1,0 +1,24 @@
+# Fichier : config/config.yml
+title: "Data Platform Dashboard"
+subtitle: "Autoformation Airflow"
+
+services:
+  - name: "Orchestration"
+    icon: "fas fa-network-wired"
+    items:
+      - name: "Airflow"
+        logo: "https://upload.wikimedia.org/wikipedia/commons/d/de/AirflowLogo.png"
+        subtitle: "Gestionnaire de DAGs"
+        url: "http://localhost:8080"
+  - name: "Consommation Data"
+    icon: "fas fa-database"
+    items:
+      - name: "Flask Reporting"
+        logo: "https://flask.palletsprojects.com/en/3.0.x/_images/flask-logo.png"
+        subtitle: "Reporting direct CSV"
+        url: "http://localhost:8181/magasin/Magasin_A"
+      - name: "FastAPI Backend"
+        logo: "https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png"
+        subtitle: "Swagger UI / ORM"
+        url: "http://localhost:8000/docs"
+        
